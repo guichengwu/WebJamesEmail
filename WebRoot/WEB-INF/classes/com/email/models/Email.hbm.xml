@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.email.models.Email" table="email">
+		<id name="emailId" column="emailId">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="folderId" type="int">
+			<column name="folderId" />
+		</property>
+		<property name="emailAddress" type="java.lang.String">
+			<column name="emailAddress" />
+		</property>
+		<property name="unread" type="boolean">
+			<column name="unread" />
+		</property>
+		<property name="subject" type="java.lang.String">
+			<column name="subject" />
+		</property>
+		<property name="emailContent" type="java.lang.String">
+			<column name="emailContent" />
+		</property>
+		<property name="hasAttach" type="boolean">
+			<column name="hasAttach" />
+		</property>
+		<property name="sendDate" type="java.util.Date">
+			<column name="sendDate" />
+		</property>
+	</class>
+</hibernate-mapping>
+

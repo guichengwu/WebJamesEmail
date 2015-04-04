@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- class EmailUser hibernate mapping -->
+	<class name="com.email.models.EmailUser" table="emailUser">
+		<id name="userId" column="userId">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="userEmail" type="java.lang.String">
+			<column name="userEmail" />
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="userName" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN" "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+
+   <constant name="struts.enable.DynamicMethodInvocation" value="true" /> 
+   <constant name="struts.i18n.encoding" value="gb2312"></constant>
+   <package name="default" extends="struts-default" namespace="/">
+   
+    <action name="registerUser" class="com.email.actions.EmailUserAction" method="register">
+           <result name="success">/main.jsp</result>
+           <result name="error">/register.jsp</result>
+    </action>
+    <action name="loginUser" class="com.email.actions.EmailUserAction" method="login">
+           <result name="success">/main.jsp</result>
+           <result name="error">/login.jsp</result>
+    </action>
+    
+    <action name="sendEmail" class="com.email.actions.EmailAction" method="sendEmail">
+          <result name="success">/sendsuccess.jsp</result>
+    </action>
+    
+   </package>
+</struts>
