@@ -4,6 +4,7 @@
 
 <html>
 <head>
+
 <link rel="stylesheet" href="css/mainPageStyle.css" type="text/css"></link>
 <title>Black List</title>
 </head>

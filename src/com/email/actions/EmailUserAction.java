@@ -118,7 +118,8 @@ public class EmailUserAction extends ActionSupport {
 			storeSessionInfo(userEmail, password);
 		   return SUCCESS;
 		} else {
-			return ERROR;
+			this.addFieldError("user", "用户名或密码错误");
+			return LOGIN;
 		}
 		
 	}

@@ -6,18 +6,54 @@
    <constant name="struts.enable.DynamicMethodInvocation" value="true" /> 
    <constant name="struts.i18n.encoding" value="gb2312"></constant>
    <package name="default" extends="struts-default" namespace="/">
+   <!--  
+    <interceptors>
+       <interceptor name="loginInterceptor" class="com.email.interceptors.LoginInterceptor" />
+       <interceptor-stack name="loginStack">
+           <interceptor-ref name="loginInteceptor">
+               <param name="excludeMethods">login,register</param>
+           </interceptor-ref>
+           <interceptor-ref name="defaultStack" />
+       </interceptor-stack>
+    </interceptors>
+   <default-interceptor-ref name="loginStack" />
+   -->
    
     <action name="registerUser" class="com.email.actions.EmailUserAction" method="register">
-           <result name="success">/main.jsp</result>
-           <result name="error">/register.jsp</result>
+           <result name="success">/WEB-INF/main.jsp</result>
+           <result name="error">/WEB-INF/register.jsp</result>
     </action>
+    
     <action name="loginUser" class="com.email.actions.EmailUserAction" method="login">
-           <result name="success">/main.jsp</result>
-           <result name="error">/login.jsp</result>
+           <result name="success">/WEB-INF/main.jsp</result>
+           <result name="login">/WEB-INF/login.jsp</result>
+           <!--
+           <interceptor-ref name="defaultStack" />
+           <interceptor-ref name="loginInterceptor">
+              <param name="excludeMethods">login</param>
+           </interceptor-ref>
+           -->
     </action>
     
     <action name="sendEmail" class="com.email.actions.EmailAction" method="sendEmail">
-          <result name="success">/sendsuccess.jsp</result>
+          <result name="success">/WEB-INF/sendsuccess.jsp</result>
+    </action>
+    
+    <action name="getMail" class="com.email.actions.EmailAction" method="getMail">
+         <result name="success">/WEB-INF/inbox.jsp</result>
+    </action>
+    
+    <!-- Redirect action -->
+    <action name="redirectToSendEmail" class="com.email.actions.RedirectAction" method="redirectToSendEmail">
+         <result name="success">/WEB-INF/sendEmail.jsp</result>
+    </action>
+    
+    <action name="redirectToRegister" class="com.email.actions.RedirectAction" method="redirectToRegister">
+         <result name="success">/WEB-INF/register.jsp</result>
+    </action>
+    
+    <action name="redirectToLogin" class="com.email.actions.RedirectAction" method="redirectToLogin">
+         <result name="success">/WEB-INF/login.jsp</result>
     </action>
     
    </package>

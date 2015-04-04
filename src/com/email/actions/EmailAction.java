@@ -1,7 +1,10 @@
 package com.email.actions;
 
 import java.util.*;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
@@ -115,13 +118,22 @@ public class EmailAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
-	public void getMail() throws Exception {
+	public String getMail() throws Exception {
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession httpSession = request.getSession(true);
+		final String userEmail = httpSession.getAttribute("userEmail").toString();
+		final String username = userEmail.substring(0, userEmail.length() - 13);
+		final String password = httpSession.getAttribute("password").toString();
+		
+		System.out.println("username: " + username);
+		System.out.println("password: "+ password);
 		Properties properties = new Properties();
 		
 		//String host = "wetoband.com";
 		String host = "localhost";
-		final String username = "wu";
-		final String password = "wu";
+		//final String username = "wu";
+		//final String password = "wu";
 		
 		//创建对话
 		Session session = Session.getDefaultInstance(properties, new Authenticator() {
@@ -137,19 +149,58 @@ public class EmailAction extends ActionSupport {
 			
 			Folder folder = store.getFolder("INBOX");
 			folder.open(Folder.READ_ONLY);
-			if (folder.hasNewMessages()) {
+			
+			Message messages[] = folder.getMessages();
+			emailList = new ArrayList<Email>();
+			
+			for (int i = 0; i < messages.length; i++) {
+				Email email = new Email();
+				
+				String emailAddress = messages[i].getFrom().toString();
+				String subject = messages[i].getSubject();
+				String content = messages[i].getContent().toString();
+				Date sendDate = messages[i].getSentDate();
+				
+				
+				email.setFolderId(3);
+				email.setHasAttach(false);
+				email.setUnread(false); 
+				email.setEmailAddress(emailAddress);
+				email.setSubject(subject);
+				email.setEmailContent(content);
+				email.setSendDate(sendDate);
+				
+				emailList.add(email);
+				
+			}
+			
+			System.out.println("Email size:  " + emailList.size());
+			
+			//HttpServletResponse response = ServletActionContext.getResponse();
+			request.setAttribute("emails", emailList);
+/*			Email[] emailArray = (Email[]) emails.toArray();
+			
+			for (int i = 0; i < emailArray.length; i++) {
+				System.out.println("EMail Content : " + emailArray[i].getEmailContent());
+			}*/
+			//RequestDispatcher dispatcher = request.getRequestDispatcher("WebRoot/inbox.jsp");
+			//dispatcher.forward(request, response);
+/*			if (folder.hasNewMessages()) {
 				Message messages[] = folder.getMessages();
 				for (int i = 0; i < messages.length; i++) {
 					String from = messages[i].getFrom().toString();
 					String subject = messages[i].getSubject();
 					String content = messages[i].getContent().toString();
 				}
-			}
+			}*/
 			
 			folder.close(true);
 			store.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return SUCCESS;
 	}
 }

@@ -35,6 +35,7 @@
 			<div class="login-main">
 				<div class="login-top">
 				 <img src="images/head-img.png"  />
+				 <font color="red" style="font-size : 12px"><s:property value="#session.errorMsg" /></font>
 				 <h1>Login <span class="anc-color"> to your Email</span></h1>
 				 <h2>Login with</h2>
 				 <ul>
@@ -62,7 +63,7 @@
 						</div>
 						<input type="submit" value="login" onClick="checkInput()" />
 					</s:form>
-					<h4>Don't have an account? <a href="register.jsp">Register Now! </a></h4>
+					<h4>Don't have an account? <a href="redirectToRegister.action">Register Now! </a></h4>
 				</div>
 			</div>
 		</div>

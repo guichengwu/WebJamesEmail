@@ -50,16 +50,16 @@
 						<li class="dropdown">
 							<ul class="icon-navigation">
 								<li>
-									<a href="sendEmail.jsp">发送邮件</a>
+									<a href="redirectToSendEmail.action">发送邮件</a>
 								</li>
 								<li>
-									<a href="inbox.jsp">收件箱<span> [09]</span> </a>
+									<a href="getMail.action">收件箱<span> [09]</span> </a>
 								</li>
 								<li>
-									<a href="outbox.jsp">发件箱<span> [02]</span> </a>
+									<a href="getOutBox.action">发件箱<span> [02]</span> </a>
 								</li>
 								<li>
-									<a href="trashbox.jsp">垃圾箱</a>
+									<a href="getTrashBox.action">垃圾箱</a>
 								</li>
 							</ul>
 						</li>
@@ -76,7 +76,7 @@
 									<a href="#">签名</a>
 								</li>
 								<li>
-									<a href="userInfo.jsp">用户信息</a>
+									<a href="userInfo.action">用户信息</a>
 								</li>
 							</ul>
 						</li>
@@ -85,7 +85,7 @@
 				<li class="menu">
 				  <ul>
 				    <li class="button">
-				      <a href="login.jsp">退出<span class="icon signout"> </span> </a>
+				      <a href="login.action">退出<span class="icon signout"> </span> </a>
 				    </li>
 				  </ul>
 				</li>
