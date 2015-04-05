@@ -56,7 +56,7 @@
 									<a href="getMail.action">收件箱<span> [09]</span> </a>
 								</li>
 								<li>
-									<a href="getOutBox.action">发件箱<span> [02]</span> </a>
+									<a href="getOutboxEmail.action">发件箱<span> [02]</span> </a>
 								</li>
 								<li>
 									<a href="getTrashBox.action">垃圾箱</a>
@@ -73,7 +73,7 @@
 						<li class="dropdown">
 							<ul class="icon-navigation">
 								<li>
-									<a href="#">签名</a>
+									<a href="redirectToLogin.action">签名</a>
 								</li>
 								<li>
 									<a href="userInfo.action">用户信息</a>
@@ -85,8 +85,18 @@
 				<li class="menu">
 				  <ul>
 				    <li class="button">
-				      <a href="redirectToLogin.action">退出<span class="icon signout"> </span> </a>
+				      <a href="#">安全<span class="icon signout"> </span> </a>
 				    </li>
+				    <li class="dropdown">
+							<ul class="icon-navigation">
+								<li>
+									<a href="#">Change password</a>
+								</li>
+								<li>
+									<a href="redirectToLogin.action">Sign out</a>
+								</li>
+							</ul>
+						</li>
 				  </ul>
 				</li>
 			</ul>

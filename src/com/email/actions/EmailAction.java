@@ -33,9 +33,15 @@ public class EmailAction extends ActionSupport {
 	EmailUserDao emailUserDao = new EmailUserDao();
 	FolderDao folderDao = new FolderDao();
 	private List<Email> emailList;
+	private List<Email> outboxEmails;
 	
 	
-	
+	public List<Email> getOutboxEmails() {
+		return outboxEmails;
+	}
+	public void setOutboxEmails(List<Email> outboxEmails) {
+		this.outboxEmails = outboxEmails;
+	}
 	public FolderDao getFolderDao() {
 		return folderDao;
 	}
@@ -203,25 +209,7 @@ public class EmailAction extends ActionSupport {
 				
 			}
 			
-			System.out.println("Email size:  " + emailList.size());
-			
-			//HttpServletResponse response = ServletActionContext.getResponse();
 			request.setAttribute("emails", emailList);
-/*			Email[] emailArray = (Email[]) emails.toArray();
-			
-			for (int i = 0; i < emailArray.length; i++) {
-				System.out.println("EMail Content : " + emailArray[i].getEmailContent());
-			}*/
-			//RequestDispatcher dispatcher = request.getRequestDispatcher("WebRoot/inbox.jsp");
-			//dispatcher.forward(request, response);
-/*			if (folder.hasNewMessages()) {
-				Message messages[] = folder.getMessages();
-				for (int i = 0; i < messages.length; i++) {
-					String from = messages[i].getFrom().toString();
-					String subject = messages[i].getSubject();
-					String content = messages[i].getContent().toString();
-				}
-			}*/
 			
 			folder.close(true);
 			store.close();
@@ -232,4 +220,24 @@ public class EmailAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
+	
+    public String getOutboxEmail() throws Exception {
+    	
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpSession httpSession = request.getSession(true);
+		final String userEmail = httpSession.getAttribute("userEmail").toString();
+    	
+		//根据email获取用户的userId
+		int userId = emailUserDao.getUserIdByEmail(userEmail);
+		
+		//根据userId和folderName获取folderId
+		int folderId = folderDao.getFolderIdByUserIdAndFolderName(userId, "发件箱");
+		
+    	outboxEmails = emailDao.getEmailForOutbox(folderId);
+    	
+    	request.setAttribute("outboxEmails", outboxEmails);
+    	
+    	return SUCCESS;
+    }
+	
 }

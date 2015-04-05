@@ -8,7 +8,7 @@ import com.email.models.EmailUser;
 
 public class EmailUserDaoTests {
 	
-	@Test
+/*	@Test
 	public void testSaveUser() {
 		EmailUser user = new EmailUser("878100317", "wuguichenglllll", "230703");
 		EmailUserDao userDao = new EmailUserDao();
@@ -22,12 +22,12 @@ public class EmailUserDaoTests {
 		boolean result = userDao.existEmailUser("878100317@qq.com");
 		
 		System.out.println(result);
-	}
+	}*/
 	
 	@Test
 	public void getUserIdByEmail() {
 		EmailUserDao userDao = new EmailUserDao();
-		int userId = userDao.getUserIdByEmail("wu@wetoband.com");
+		int userId = userDao.getUserIdByEmail("guichengwu@wetoband.com");
 		System.out.println("userId: " + userId);
 	}
 	

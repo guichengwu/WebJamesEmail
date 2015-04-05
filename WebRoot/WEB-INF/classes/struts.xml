@@ -43,6 +43,9 @@
          <result name="success">/WEB-INF/inbox.jsp</result>
     </action>
     
+    <action name="getOutboxEmail" class="com.email.actions.EmailAction" method="getOutboxEmail">
+         <result name="success">/WEB-INF/outbox.jsp</result>
+    </action>
     <!-- Redirect action -->
     <action name="redirectToSendEmail" class="com.email.actions.RedirectAction" method="redirectToSendEmail">
          <result name="success">/WEB-INF/sendEmail.jsp</result>
@@ -55,6 +58,8 @@
     <action name="redirectToLogin" class="com.email.actions.RedirectAction" method="redirectToLogin">
          <result name="success">/WEB-INF/login.jsp</result>
     </action>
+    
+    
     
    </package>
 </struts>

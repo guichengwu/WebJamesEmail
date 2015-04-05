@@ -26,7 +26,7 @@
 				      <td><s:property value="emailAddress" /></td>
 				      <td><s:property value="subject" /></td>
 				      <td><s:property value="emailContent" /></td>
-				      <td><br></td>
+				      <td><s:property value="sendDate" /></td>
 				   </tr>
 				 </s:iterator>
 				</tbody>
