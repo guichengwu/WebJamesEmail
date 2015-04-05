@@ -13,5 +13,11 @@ public class FolderDaoTests {
 		FolderDao folderDao = new FolderDao();
 		folderDao.addFolder(folder);
 	}
+	
+	@Test public void TestFolderIdByUserIdAndFolderName() {
+		FolderDao folderDao = new FolderDao();
+		int folderId = folderDao.getFolderIdByUserIdAndFolderName(37, "·¢¼þÏä");
+		System.out.println("Folder Id :" + folderId);
+	}
 
 }

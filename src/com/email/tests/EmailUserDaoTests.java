@@ -24,5 +24,12 @@ public class EmailUserDaoTests {
 		System.out.println(result);
 	}
 	
+	@Test
+	public void getUserIdByEmail() {
+		EmailUserDao userDao = new EmailUserDao();
+		int userId = userDao.getUserIdByEmail("wu@wetoband.com");
+		System.out.println("userId: " + userId);
+	}
+	
 	
 }

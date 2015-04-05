@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import org.apache.struts2.ServletActionContext;
 import com.email.dao.EmailUserDao;
 import com.email.dao.FolderDao;
+import com.email.dao.TelnetDao;
 import com.email.models.EmailUser;
 import com.email.models.Folder;
 import com.opensymphony.xwork2.ActionSupport;
@@ -92,6 +93,11 @@ public class EmailUserAction extends ActionSupport {
 		boolean result = emailUserDao.saveEmailUser(emailUser);
 		
 		if (result) {
+			//调用telnet 在James里面增加emailUser
+			
+			String user = userEmail.substring(0, userEmail.length() - 13);
+			TelnetDao telnetDao = new TelnetDao("localhost", user, password);
+			
 			//注册用户时，为用户增加三个文件:分别为收件箱,发件箱,垃圾箱
 			Folder inbox = new Folder(emailUser.getUserId(), "收件箱");
 			Folder outBox = new Folder(emailUser.getUserId(), "发件箱");

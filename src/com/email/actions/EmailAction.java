@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.email.dao.EmailDao;
+import com.email.dao.EmailUserDao;
+import com.email.dao.FolderDao;
 import com.email.models.Email;
 
 import java.util.Properties;
@@ -28,10 +30,24 @@ public class EmailAction extends ActionSupport {
 	
 	private Email email;
 	EmailDao emailDao = new EmailDao();
+	EmailUserDao emailUserDao = new EmailUserDao();
+	FolderDao folderDao = new FolderDao();
 	private List<Email> emailList;
 	
 	
 	
+	public FolderDao getFolderDao() {
+		return folderDao;
+	}
+	public void setFolderDao(FolderDao folderDao) {
+		this.folderDao = folderDao;
+	}
+	public EmailUserDao getEmailUserDao() {
+		return emailUserDao;
+	}
+	public void setEmailUserDao(EmailUserDao emailUserDao) {
+		this.emailUserDao = emailUserDao;
+	}
 	public Email getEmail() {
 		return email;
 	}
@@ -103,8 +119,16 @@ public class EmailAction extends ActionSupport {
 			message.setText(content);
 			Transport.send(message);
 			
-			int folderId = 3;
+			//int folderId = 3;
+			//根据email获取用户的userId
+			int userId = emailUserDao.getUserIdByEmail(userEmail);
+			
+			//根据userId和folderName获取folderId
+			int folderId = folderDao.getFolderIdByUserIdAndFolderName(userId, "发件箱");
+			
+			//当前日期
 			Date date = new Date();
+			
 			Email email = new Email(folderId, receiver, false, subject, content,
 					false, date);
 			
@@ -156,13 +180,18 @@ public class EmailAction extends ActionSupport {
 			for (int i = 0; i < messages.length; i++) {
 				Email email = new Email();
 				
-				String emailAddress = messages[i].getFrom().toString();
+				String emailAddress = messages[i].getFrom()[0].toString();
 				String subject = messages[i].getSubject();
 				String content = messages[i].getContent().toString();
 				Date sendDate = messages[i].getSentDate();
 				
+				//根据email获取用户的userId
+				int userId = emailUserDao.getUserIdByEmail(userEmail);
 				
-				email.setFolderId(3);
+				//根据userId和folderName获取folderId
+				int folderId = folderDao.getFolderIdByUserIdAndFolderName(userId, "收件箱");
+				
+				email.setFolderId(folderId);
 				email.setHasAttach(false);
 				email.setUnread(false); 
 				email.setEmailAddress(emailAddress);

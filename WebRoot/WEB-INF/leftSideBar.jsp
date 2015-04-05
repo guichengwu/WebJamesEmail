@@ -85,7 +85,7 @@
 				<li class="menu">
 				  <ul>
 				    <li class="button">
-				      <a href="login.action">ÍË³ö<span class="icon signout"> </span> </a>
+				      <a href="redirectToLogin.action">ÍË³ö<span class="icon signout"> </span> </a>
 				    </li>
 				  </ul>
 				</li>

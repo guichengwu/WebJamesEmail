@@ -106,5 +106,30 @@ public class EmailUserDao {
 		
 		return emailUsers;
 	}
+	
+	public int getUserIdByEmail(String userEmail) {
+		int userId = 0;
+		EmailUser emailUser = new EmailUser();
+		Session session = null;
+		Transaction transaction = null;
+		
+		try {
+			session = HibernateSessionFactory.getSession();
+			transaction = session.beginTransaction();
+			String hql = "select user from EmailUser user where user.userEmail = :userEmail";
+			 emailUser = (EmailUser)session.createQuery(hql)
+			                .setString("userEmail", userEmail)
+			                .uniqueResult();
+			 
+			 transaction.commit();
+			 
+			 userId = emailUser.getUserId();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return userId;
+	}
 
 }

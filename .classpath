@@ -32,5 +32,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/javax.mail.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/JScape/lib/sinetfactory.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/sinetfactory.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
